@@ -24,7 +24,7 @@ function Creset() {
 
 
 function deleteDigit() {
-    valueA = String(valueA).slice(0, -1);
+    valueA = valueA.slice(0, -1);
     display(valueA);
 }
 
@@ -46,27 +46,33 @@ function commaHandler() {
 
 
 function inverse() {
-    valueA = formatValue(1/valueA);
+    valueA = format(1/valueA);
     display(valueA);
 }
 
 
 function square() {
-    valueA =  formatValue(valueA**2);
+    valueA =  format(valueA**2);
     display(valueA);
 }
 
 
 function squareRoot() {
-    valueA = formatValue(Math.sqrt(valueA));
+    valueA = format(Math.sqrt(valueA));
     display(valueA);
 }
 
 
-function formatValue(number) {
-    if (number*100 % 1 !== 0) {
-        return number.toFixed(2)
-    } else { return number }
+function format(value) {
+    if (value*100 % 1 !== 0) {
+        return value.toFixed(2)
+    } else { 
+        if (typeof value === "string") {
+            return value;
+        } else {
+            return String(value)
+        }
+    }
 }
 
 
@@ -75,22 +81,20 @@ function display(output) {
 }
 
 
-function execute() {
-    console.log(valueB, operator, valueA)
-    
+function execute() {    
     if (operator==="" && valueA !== "") {
         calculationsTag.innerHTML = valueA+" =";
         calculationsTag.style.color = "#7E7E7E";
         return;
     }
-    if (valueA === "") { console.log("ahah"); return }
+    if (valueA === "") { return }
     
     calculationsTag.innerHTML += ` ${valueA} =`
     valueA =  Number(valueA)
     valueB = Number(valueB)
     
     switch (operator) {
-        case "/": valueA = formatValue(valueB/valueA); break;
+        case "/": valueA = format(valueB/valueA); break;
         case "*": valueA = valueB*valueA; break;
         case "+": valueA = valueB+valueA; break;
         case "-": valueA = valueB-valueA; break;
@@ -124,8 +128,8 @@ function operatorHandler(clickedOperator) {
         case "-": symbol = String.fromCharCode(8722); break 
     }
     if (operator !== "" && valueA === "") {
-        calculationsTag.innerHTML = `${valueB} ${symbol}`;
         // modifie l'opérateur selectionné
+        calculationsTag.innerHTML = `${valueB} ${symbol}`;
         return;
     }
 
