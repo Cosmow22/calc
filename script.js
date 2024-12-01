@@ -25,6 +25,10 @@ function Creset() {
 
 function deleteDigit() {
     valueA = valueA.slice(0, -1);
+    if (valueA.slice(-1) === ".") { 
+        valueA = valueA.slice(0, -1); 
+        commaModeEnabled = false;
+    }
     display(valueA);
 }
 
