@@ -25,12 +25,18 @@ body {
     padding: 0 4px 4px 4px;
 }
 
+#output, #calculations { text-align: end; margin-right: 4px}
+
 #output {
-    text-align: end;
     font-size: 3em;
     font-weight: 500;
-    margin-top: 35%;
     overflow: auto;
+}
+
+#calculations {
+    margin-top: 30%;
+    padding-bottom: 15px;
+    color: #7E7E7E
 }
 
 .cell {
