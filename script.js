@@ -29,8 +29,12 @@ function  modifySign() {
 
 
 function commaHandler() {
-    valueA += ".";
-    display(valueA);
+    console.log(commaModeEnabled)
+    if (!commaModeEnabled) {
+        valueA += ".";
+        display(valueA);
+        commaModeEnabled = true
+    }
 }
 
 
@@ -87,6 +91,7 @@ function execute() {
             break;
     }
     operator = "";
+    if (valueA % 1 === 0 ) { commaModeEnabled = false };
     
     if (isFinite(valueA)) {
         display(valueA);
@@ -105,6 +110,7 @@ function operatorHandler(clickedOperator) {
     operator = clickedOperator
     valueB = valueA;
     valueA = "";
+    commaModeEnabled = false;
 }
 
 
@@ -112,7 +118,7 @@ const outputTag = document.getElementById("output")
 var valueB = 0;
 var valueA = "";
 var operator = "";
-
+var commaModeEnabled = false
 
 for (let number of document.getElementsByClassName("number")) {
     number.addEventListener("click", () => {
