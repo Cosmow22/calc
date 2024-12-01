@@ -35,20 +35,27 @@ function commaHandler() {
 
 
 function inverse() {
-    valueA = (1/valueA).toFixed(2);
+    valueA = formatNumber(1/valueA);
     display(valueA);
 }
 
 
 function square() {
-    valueA =  (valueA**2).toFixed(2);
+    valueA =  formatNumber(valueA**2);
     display(valueA);
 }
 
 
 function squareRoot() {
-    valueA = Math.sqrt(valueA);
+    valueA = formatNumber(Math.sqrt(valueA));
     display(valueA);
+}
+
+
+function formatNumber(number) {
+    if (number*100 % 1 !== 0) {
+        return number.toFixed(2)
+    } else { return number }
 }
 
 
@@ -67,7 +74,7 @@ function execute() {
     
     switch (operator) {
         case "/":
-            valueA = (valueB/valueA).toFixed(2);
+            valueA = formatNumber(valueB/valueA);
             break;
         case "*":
             valueA = valueB*valueA;
