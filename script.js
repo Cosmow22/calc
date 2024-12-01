@@ -5,7 +5,7 @@ function showHistory() {
 
 function CEreset() {
     outputTag.innerHTML = "";
-    valueA= "";
+    valueA = "";
 }
 
 
@@ -18,13 +18,13 @@ function Creset() {
 
 
 function deleteDigit() {
-    valueA = valueA.slice(0, -1);
+    valueA = String(valueA).slice(0, -1);
     display(valueA);
 }
 
 
 function  modifySign() {
-    valueA = -Number(valueA);
+    valueA = String(-Number(valueA));
     display(valueA);
 }
 
@@ -40,24 +40,24 @@ function commaHandler() {
 
 
 function inverse() {
-    valueA = formatNumber(1/valueA);
+    valueA = formatValue(1/valueA);
     display(valueA);
 }
 
 
 function square() {
-    valueA =  formatNumber(valueA**2);
+    valueA =  formatValue(valueA**2);
     display(valueA);
 }
 
 
 function squareRoot() {
-    valueA = formatNumber(Math.sqrt(valueA));
+    valueA = formatValue(Math.sqrt(valueA));
     display(valueA);
 }
 
 
-function formatNumber(number) {
+function formatValue(number) {
     if (number*100 % 1 !== 0) {
         return number.toFixed(2)
     } else { return number }
@@ -84,18 +84,10 @@ function execute() {
     valueB = Number(valueB)
     
     switch (operator) {
-        case "/":
-            valueA = formatNumber(valueB/valueA);
-            break;
-        case "*":
-            valueA = valueB*valueA;
-            break;
-        case "+":
-            valueA = valueB+valueA;
-            break;
-        case "-":
-            valueA = valueB-valueA;
-            break;
+        case "/": valueA = formatValue(valueB/valueA); break;
+        case "*": valueA = valueB*valueA; break;
+        case "+": valueA = valueB+valueA; break;
+        case "-": valueA = valueB-valueA; break;
     }
     operator = "";
     if (valueA % 1 === 0 ) { commaModeEnabled = false };
@@ -106,6 +98,8 @@ function execute() {
         display("Error");
         valueA = "";
     }
+    valueA =  String(valueA)
+    valueB = String(valueB)
 }
 
 
@@ -119,12 +113,13 @@ function operatorHandler(clickedOperator) {
 
     let symbol = operator
     switch (operator) {
-        case "*": { symbol = String.fromCharCode(215); break}
-        case "/": {symbol = String.fromCharCode(247); break}
-        case "-": {symbol = String.fromCharCode(8722); break }
+        case "*":  symbol = String.fromCharCode(215); break
+        case "/": symbol = String.fromCharCode(247); break
+        case "-": symbol = String.fromCharCode(8722); break 
     }
     if (operator !== "" && valueA === "") {
         calculationsTag.innerHTML = `${valueB} ${symbol}`;
+        // modifie l'opérateur selectionné
         return;
     }
 
@@ -139,7 +134,7 @@ function operatorHandler(clickedOperator) {
 
 const outputTag = document.getElementById("output");
 const calculationsTag = document.getElementById("calculations");
-var valueB = 0;
+var valueB = "";
 var valueA = "";
 var operator = "";
 var commaModeEnabled = false;
