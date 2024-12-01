@@ -5,14 +5,15 @@ function showHistory() {
 
 function CEreset() {
     outputTag.innerHTML = "";
-    valueA= ""
+    valueA= "";
 }
 
 
 function Creset() {
-    outputTag.innerHTML = ""
-    valueA = ""
-    valueB = ""
+    outputTag.innerHTML = "";
+    valueA = "";
+    valueB = "";
+    calculationsTag.style.color = "#F3F3F3"; // cache le texte sans le décharger
 }
 
 
@@ -71,8 +72,14 @@ function display(output) {
 function execute() {
     console.log(valueB, operator, valueA)
     
-    if (valueB === "" || valueA === "") { return }
+    if (operator==="" && valueA !== "") {
+        calculationsTag.innerHTML = valueA+" =";
+        calculationsTag.style.color = "#7E7E7E";
+        return;
+    }
+    if (valueA === "") { console.log("ahah"); return }
     
+    calculationsTag.innerHTML += ` ${valueA} =`
     valueA =  Number(valueA)
     valueB = Number(valueB)
     
@@ -107,22 +114,32 @@ function operatorHandler(clickedOperator) {
         // permet plusieurs opérations sans appuyer sur exe à chaque fois
         execute(); 
     }
-    operator = clickedOperator
+    operator = clickedOperator;
+    
+    let symbol = operator
+    switch (operator) {
+        case "*": { symbol = String.fromCharCode(215) }
+        case "/": {symbol = String.fromCharCode(247) }
+    }
+    calculationsTag.innerHTML = `${valueA} ${symbol}`
+    calculationsTag.style.color = "#7E7E7E";
+    
     valueB = valueA;
     valueA = "";
     commaModeEnabled = false;
 }
 
 
-const outputTag = document.getElementById("output")
+const outputTag = document.getElementById("output");
+const calculationsTag = document.getElementById("calculations");
 var valueB = 0;
 var valueA = "";
 var operator = "";
-var commaModeEnabled = false
+var commaModeEnabled = false;
 
 for (let number of document.getElementsByClassName("number")) {
     number.addEventListener("click", () => {
         valueA += number.innerHTML;
-        display(valueA)
+        display(valueA);
     });
 };
