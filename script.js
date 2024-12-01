@@ -46,18 +46,21 @@ function commaHandler() {
 
 
 function inverse() {
+    calculationsTag.innerHTML =  `1/(${valueA})`
     valueA = format(1/valueA);
     display(valueA);
 }
 
 
 function square() {
+    calculationsTag.innerHTML =  `sqr(${valueA})`
     valueA =  format(valueA**2);
     display(valueA);
 }
 
 
 function squareRoot() {
+    calculationsTag.innerHTML =  String.fromCharCode(8730)+valueA
     valueA = format(Math.sqrt(valueA));
     display(valueA);
 }
