@@ -1,5 +1,11 @@
-function showHistory() {
-    pass // pas encore implémenté
+function toggleHistory() {
+    if (historyIsVisible) {
+        calculationsTag.style.color = "#F3F3F3"; // cache le texte sans le décharger
+        historyIsVisible = !historyIsVisible;
+    } else {
+        calculationsTag.style.color = "#7E7E7E";
+        historyIsVisible = !historyIsVisible;
+    }
 }
 
 
@@ -138,6 +144,7 @@ var valueB = "";
 var valueA = "";
 var operator = "";
 var commaModeEnabled = false;
+var historyIsVisible = true
 
 for (let number of document.getElementsByClassName("number")) {
     number.addEventListener("click", () => {
