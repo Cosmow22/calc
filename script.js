@@ -110,17 +110,24 @@ function execute() {
 
 
 function operatorHandler(clickedOperator) {
-    if (operator !== "") { 
+    if (operator !== "" && valueA !=="") { 
         // permet plusieurs opérations sans appuyer sur exe à chaque fois
         execute(); 
+        return;
     }
     operator = clickedOperator;
-    
+
     let symbol = operator
     switch (operator) {
-        case "*": { symbol = String.fromCharCode(215) }
-        case "/": {symbol = String.fromCharCode(247) }
+        case "*": { symbol = String.fromCharCode(215); break}
+        case "/": {symbol = String.fromCharCode(247); break}
+        case "-": {symbol = String.fromCharCode(8722); break }
     }
+    if (operator !== "" && valueA === "") {
+        calculationsTag.innerHTML = `${valueB} ${symbol}`;
+        return;
+    }
+
     calculationsTag.innerHTML = `${valueA} ${symbol}`
     calculationsTag.style.color = "#7E7E7E";
     
